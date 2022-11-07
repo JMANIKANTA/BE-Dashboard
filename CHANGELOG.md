@@ -2,7 +2,7 @@
 
 ### `@BE/DASHBOARD@vNext`
 
-### [v1.2.0](https://github.com/JMANIKANTA/BE-Dashboard/pull/2)
+### [v1.2.0](https://github.com/JMANIKANTA/BE-Dashboard/pull/3)
 
 - Implemented Login api
 
