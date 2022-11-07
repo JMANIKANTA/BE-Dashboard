@@ -29,6 +29,7 @@ app.post("/register", async (req, res) => {
       first_name,
       last_name,
       email: email.toLowerCase(),
+      password: passwordEncry,
     });
     const token = jwt.sign(
       { user_id: user._id, email },
@@ -41,6 +42,38 @@ app.post("/register", async (req, res) => {
     res.status(200).json(user);
   } catch (err) {
     console.log(err);
+  }
+});
+
+app.post("/login", async (req, res) => {
+  try {
+    const { email, password, first_name, last_name } = req.body;
+    if (!(email && password)) {
+      console.log("All fields are required");
+      res.status(400).send("All fields are required");
+    }
+
+    const oldUser = await User.findOne({ email });
+    if (!oldUser) {
+      console.log("No such user exists, Please register");
+      res.status(404).send("No such user exists, Please register");
+    }
+
+    if (oldUser && (await bcrypt.compare(password, oldUser.password))) {
+      const token = jwt.sign(
+        { user_id: oldUser._id, email },
+        process.env.TOKEN_KEY,
+        {
+          expiresIn: "1h",
+        }
+      );
+      oldUser.token = token;
+      res.status(200).json(oldUser);
+    } else {
+      res.status(400).send("Invalid Credentials");
+    }
+  } catch (error) {
+    console.log(error);
   }
 });
 

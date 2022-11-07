@@ -2,6 +2,10 @@
 
 ### `@BE/DASHBOARD@vNext`
 
+### [v1.2.0](https://github.com/JMANIKANTA/BE-Dashboard/pull/2)
+
+- Implemented Login api
+
 ### [v1.1.0](https://github.com/JMANIKANTA/BE-Dashboard/pull/2)
 
 - Created Schema, user register API
