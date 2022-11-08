@@ -1,10 +1,12 @@
 require("dotenv").config();
 require("./config/database").connect();
+const cors = require("cors");
 var bcrypt = require("bcryptjs");
 var jwt = require("jsonwebtoken");
 const express = require("express");
 const app = express();
-
+app.use(cors());
+app.options("*", cors());
 app.use(express.json());
 
 const User = require("./model/user");
